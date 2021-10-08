@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link
+        href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,700,700i%7CMaitree:200,300,400,600,700&amp;subset=latin-ext"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+        integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/webslides.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Deep dive hipe</title>
+</head>
+
+<body>
+    <main role="main"></main>
+    <article id="webslides" class="horisontal">
+        <!-- Slide 1 -->
+        <section>
+            <div class="wrap">
+                <h1><strong>DOM manipulation and Event listeners</strong></h1>
+                <h4>Deep dive | Lucian Aionicesei</h4><br>
+                <ul class="text-intro">
+                    <li>How do we manipulate DOM elements using event listeners?</li>
+                    <li>Explore the different types of events, such as:
+                        <ul>
+                            <li>mouse events</li>
+                            <li>keyboard events</li>
+                            <li>input events</li>
+                        </ul>
+                    </li>
+                    <li> What is Event Bubbling & Event Delegation?</li>
+                </ul>
+            </div>
+        </section>
+        <!-- Slide 2 -->
+        <section>
+            <div class="wrap">
+                <h2><strong>What can event listeners do?</strong></h2><br>
+                <p class="text-intro">They allow us to add interactive functionality to HTML elements by “listening” to
+                    different events that take place on the page, such as when the user clicks a button, presses a key,
+                    or when an element loads.</p>
+                <div class="grid vertical-align">
+                    <div class="column">
+                        <pre>
+                            <h4>HTML</h4>
+&lt;div&gt;
+    &lt;h4>Interact with this button&lt;/h4&gt;
+    &lt;div class="button task_1">Click here&lt;/div&gt;
+    &lt;p class="action">Waiting for action...&lt;/p&gt;
+&lt;/div>
+                            <h4>JS</h4>
+document.querySelector(".task_1").addEventListener('click', callRoger)
+                          </pre>
+                    </div>
+                    <div class="column">
+                        <div class="aligncenter">
+                            <h4>Interact with this button</h4><br>
+                            <div id="task_1" class="button">Click here</div>
+                            <p class="action">Waiting for action...</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="muscle_cangaroo text-intro">
+                    <div class="speech_bubble hidden">
+                        <p class="speech_text">I knew you could do it</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Slide 3 -->
+        <section>
+            <div class="wrap">
+                <h2><strong>How to select DOM elements</strong></h2><br>
+                <p class="text-intro">In order to assign Event Listeners, we need to select the right DOM elements with
+                    JS. For that we only need the command: <i>"document.querySelector"</i> for single elements and
+                    <i>"document.querySelectorAll"</i> for multiple elements of the same type</p>
+                <div class="grid vertical-align">
+                    <div class="column bg-white">
+                        <h5>You can select elements by:</h5>
+                        <ul class="flexblock reasons">
+                            <li id="hover_over1">
+                                <h2>Their id</h2>
+                                <code>
+                                    document.querySelector("#demo_article");
+                                </code>
+                            </li>
+                            <li id="hover_over2">
+                                <h2>Their classes</h2>
+                                <code>
+                                    document.querySelector(".tasks_list");
+                                </code>
+                            </li>
+                            <li id="hover_over3">
+                                <h2>Their html tag</h2>
+                                <code>
+                                    document.querySelector("li");
+                                </code>
+                                <p><br>We need to use <i>"document.querySelectorAll" to select all the elements of a
+                                        specific type.</i></p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <article class="demo_article">
+                            <div class="article_content">
+                                <p class="list_title">&lt;article id="demo_article"&gt;</p>
+                                <ul class="tasks_list">
+                                    <p class="list_title">&lt;ul class="tasks_list"&gt;</p>
+                                    <li class="demo_list">&lt;li&gt;Task no.1&lt;/li&gt;</li>
+                                    <li class="demo_list">&lt;li&gt;Task no.2&lt;/li&gt;</li>
+                                    <li class="demo_list">&lt;li&gt;Task no.3&lt;/li&gt;</li>
+                                    <li class="demo_list">&lt;li&gt;Task no.4&lt;/li&gt;</li>
+                                </ul>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Slide 4 -->
+        <section>
+            <div class="wrap">
+                <h2><strong>How to select DOM elements</strong></h2><br>
+                <p class="text-intro">In order to assign Event Listeners, we need to select the right DOM elements with
+                    JS. For that we only need the command: <i>"document.querySelector"</i> for single elements and
+                    <i>"document.querySelectorAll"</i> for multiple elements of the same type</p>
+                <div class="grid vertical-align">
+                    <div class="column bg-white">
+                        <h5>Select multiple elements:</h5>
+                        <ul class="flexblock reasons">
+                            <li id="hover_over4">
+                                <h2>Select all elements of the same type</h2>
+                                <code>
+                                    document.querySelectorAll("li");
+                                </code>
+                                <p><br>Using the <i>"document.querySelectorAll"</i> will create an array of the all the
+                                    selected elements. You will further need to call each element at a time, for
+                                    instance by using a loop or the <i>"forEach"</i> command to select and modify all
+                                    the elements.<br>Example:</p>
+                                <code>
+                                    const items = document.querySelectorAll("li");
+                                    items.forEach(function (item){
+                                    item.style.background = 'yellow';
+                                    })
+                                </code>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <article class="demo_article">
+                            <div class="article_content">
+                                <p class="list_title">&lt;article id="demo_article"&gt;</p>
+                                <ul class="tasks_list">
+                                    <p class="list_title">&lt;ul class="tasks_list"&gt;</p>
+                                    <li class="demo_list">&lt;li&gt;Task no.1&lt;/li&gt;</li>
+                                    <li class="demo_list">&lt;li&gt;Task no.2&lt;/li&gt;</li>
+                                    <li class="demo_list">&lt;li&gt;Task no.3&lt;/li&gt;</li>
+                                    <li class="demo_list">&lt;li&gt;Task no.4&lt;/li&gt;</li>
+                                </ul>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Slide 5 -->
+        <section>
+            <div class="wrap">
+                <h2><strong>How to select DOM elements</strong></h2><br>
+                <p class="text-intro">In order to assign Event Listeners, we need to select the right DOM elements with
+                    JS. For that we only need the command: <i>"document.querySelector"</i> for single elements and
+                    <i>"document.querySelectorAll"</i> for multiple elements of the same type</p>
+                <div class="grid vertical-align">
+                    <div class="column bg-white">
+                        <h5>Selecting specific elements:</h5>
+                        <ul class="flexblock reasons">
+                            <li id="hover_over5">
+                                <h2>Select using CSS Pseudo-classes</h2>
+                                <code>
+                                    document.querySelector("ul li:nth-child(3)");
+                                </code>
+                            </li>
+                            <li id="hover_over6">
+                                <h2>Their classes</h2>
+                                <code>
+                                    document.querySelector("ul li:nth-child(odd)");
+                                </code>
+                            </li>
+                            <li id="hover_over7">
+                                <h2>Their html tag</h2>
+                                <code>
+                                    document.querySelector("ul li:last-child");
+                                </code>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <article class="demo_article">
+                            <div class="article_content">
+                                <p class="list_title">&lt;article id="demo_article"&gt;</p>
+                                <ul class="tasks_list specific_select">
+                                    <p class="list_title">&lt;ul class="tasks_list"&gt;</p>
+                                    <li class="demo_list">&lt;li&gt;Task no.1&lt;/li&gt;</li>
+                                    <li class="demo_list">&lt;li&gt;Task no.2&lt;/li&gt;</li>
+                                    <li class="demo_list">&lt;li&gt;Task no.3&lt;/li&gt;</li>
+                                    <li class="demo_list">&lt;li&gt;Task no.4&lt;/li&gt;</li>
+                                </ul>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Slide 6 -->
+        <section>
+            <div class="wrap">
+                <h2><strong>Traversing the DOM</strong></h2><br>
+                <p class="text-intro">The act of selecting an element from another element.<br><strong>But why we
+                        traverse?</strong><br>Let’s say you want to go to your neighbor’s house. What’s the fastest and
+                    most efficient way to get there?</p>
+                <div class="grid vertical-align">
+                    <div class="column bg-white">
+                        <h5>How do we do it?</h5>
+                        <code>
+                            let val;<br>const list = document.querySelector<br>("ul.task_list");<br>val = list;
+                        </code>
+                        <ul class="flexblock reasons">
+                            <li id="hover_over8">
+                                <h2>Select the children of that element:</h2>
+                                <code>
+                                    val = list.children;
+                                </code>
+                            </li>
+                            <li id="hover_over9">
+                                <h2>Select a specific children of that element:</h2>
+                                <code>
+                                    val = list.children[2];
+                                </code>
+                            </li>
+                            <li id="hover_over10">
+                                <h2>Select the children element of that children element:</h2>
+                                <code>
+                                    val = list.children[2].children;
+                                </code>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <article class="demo_article">
+                            <div class="article_content">
+                                <p class="list_title">&lt;article id="demo_article"&gt;</p>
+                                <ul class="tasks_list traversing_list">
+                                    <p class="list_title">&lt;ul class="tasks_list"&gt;</p>
+                                    <li class="demo_list">&lt;li class="demo_list"&gt;Task no.1&lt;/li&gt;</li>
+                                    <li class="demo_list">&lt;li&gt;&lt;a href="#"&gt;<a href="#">Task
+                                            no.2</a>&lt;/a&gt;&lt;/li&gt;</li>
+                                    <li class="demo_list">&lt;li class="demo_list"&gt;Task no.3&lt;/li&gt;</li>
+                                    <li class="demo_list">&lt;li class="demo_list"&gt;Task no.4&lt;/li&gt;</li>
+                                </ul>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Slide 7 -->
+        <section>
+            <div class="wrap">
+                <h2><strong>Traversing the DOM</strong></h2><br>
+                <p class="text-intro">The act of selecting an element from another element.</p>
+                <div class="grid vertical-align">
+                    <div class="column bg-white">
+                        <h5>How do we do it?</h5>
+                        <code>
+                            let val;<br>const listItem = document.querySelector<br>("li.demo_list");<br>val = list;
+                        </code>
+                        <ul class="flexblock reasons">
+                            <li id="hover_over11">
+                                <h2>Select the parent of that element:</h2>
+                                <code>
+                                    val = listItem.parentElement;
+                                </code>
+                            </li>
+                            <li id="hover_over12">
+                                <h2>Select a specific attribute of that parent element:</h2>
+                                <code>
+                                    val = listItem.parentElement.classList;
+                                </code>
+                            </li>
+                            <li id="hover_over13">
+                                <h2>Select that parent element's parent element:</h2>
+                                <code>
+                                    val = listItem.parentElement.parentElement;
+                                </code>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <article class="demo_article">
+                            <div class="article_content">
+                                <p class="list_title">&lt;article id="demo_article"&gt;</p>
+                                <ul class="tasks_list traversing_list">
+                                    <p class="list_title">&lt;ul class="tasks_list"&gt;</p>
+                                    <li class="demo_list">&lt;li class="demo_list"&gt;Task no.1&lt;/li&gt;</li>
+                                    <li class="demo_list">&lt;li&gt;&lt;a href="#"&gt;<a href="#">Task
+                                            no.2</a>&lt;/a&gt;&lt;/li&gt;</li>
+                                    <li class="demo_list">&lt;li class="demo_list"&gt;Task no.3&lt;/li&gt;</li>
+                                    <li class="demo_list">&lt;li class="demo_list"&gt;Task no.4&lt;/li&gt;</li>
+                                </ul>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Slide 8 -->
+        <section>
+            <div class="wrap">
+                <h2><strong>Creating DOM elements from JS</strong></h2><br>
+                <div class="grid vertical-align">
+                    <div class="column bg-white">
+                        <h4>How do we do it?</h4>
+                        <h5>Create element</h5>
+                        <p class="no_padding">Create a list element</p>
+                        <code>
+                            const li = document.createElement('li');
+                        </code>
+                        <p class="no_padding">Create a link element</p>
+                        <code>
+                            const link = document.createElement('a');
+                        </code>
+                        <h5>Add class</h5>
+                        <code>
+                            li.className = 'demo_list';
+                        </code>
+                        <h5>Add id</h5>
+                        <code>
+                            li.id = "new_item"
+                        </code>
+                        <h5>Add attribute</h5>
+                        <p class="no_padding">Set attributes for the link</p>
+                        <code>
+                            link.setAttribute('href', '#');
+                        </code>
+                        <h5>Create the text node and append</h5>
+                        <code>
+                            link.appendChild(document.createTextNode('New task'));
+                        </code>
+                        <h5>Append link to li</h5>
+                        <code>
+                            li.appendChild(link);
+                        </code>
+                        <h5>Append li as a child to ul</h5>
+                        <code>
+                            document.querySelector('ul.tasks_list').appendChild(li);
+                        </code>
+                    </div>
+                    <div class="column">
+                        <article class="demo_article">
+                            <div class="article_content">
+                                <p class="list_title">&lt;article id="demo_article"&gt;</p>
+                                <ul class="tasks_list creating_list">
+                                    <p class="list_title">&lt;ul class="tasks_list"&gt;</p>
+                                    <li class="demo_list">&lt;li class="demo_list"&gt;Task no.1&lt;/li&gt;</li>
+                                    <li class="demo_list">&lt;li&gt;&lt;a href="#"&gt;<a href="#">Task
+                                            no.2</a>&lt;/a&gt;&lt;/li&gt;</a></li>
+                                    <li class="demo_list">&lt;li class="demo_list"&gt;Task no.3&lt;/li&gt;</li>
+                                    <li class="demo_list">&lt;li class="demo_list"&gt;Task no.4&lt;/li&gt;</li>
+                                    <li class="demo_list" id="new-item">&lt;li class="demo_list" id="new_item"&gt;&lt;a
+                                        href="#"&gt;<a href="#">New task</a>&lt;/a&gt;&lt;/li&gt;</li>
+                                </ul>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Slide 9 -->
+        <section>
+            <div class="wrap">
+                <h2><strong>Replacing DOM elements from JS</strong></h2><br>
+                <div class="grid vertical-align">
+                    <div class="column bg-white">
+                        <h4>How do we do it?</h4>
+                        <!-- // Create an Element
+const addedListItem = document.createElement('h5');
+// Add id
+addedListItem.id = 'added-item';
+// New text node
+addedListItem.appendChild(document.createTextNode("I am a heading"));
+
+//Select the existing element
+const existingListItem = document.querySelector('ul.removing_list li:nth-child(4)');
+
+//Parent
+const ulElement = document.querySelector("ul.removing_list");
+
+//Replace
+
+ulElement.replaceChild(addedListItem, existingListItem); -->
+                        <h5>Create an Element</h5>
+                        <code>
+                            const addedListItem = document.createElement('h5');
+                        </code>
+                        <h5>Add id</h5>
+                        <code>
+                            addedListItem.id = 'added-item';
+                        </code>
+                        <h5>New text node</h5>
+                        <code>
+                            addedListItem.appendChild(document.createTextNode("I am a heading"));
+                        </code>
+                        <h5>Select the existing element</h5>
+                        <code>
+                            const existingListItem = document.querySelector('ul.tasks_list li:nth-child(3)');
+                        </code>
+                        <h5>Select parent Element</h5>
+                        <code>
+                            const ulElement = document.querySelector("ul.tasks_list");
+                        </code>
+                        <h5>Replace</h5>
+                        <code>
+                            ulElement.replaceChild(addedListItem, existingListItem);
+                        </code>
+                    </div>
+                    <div class="column">
+                        <article class="demo_article">
+                            <div class="article_content">
+                                <p class="list_title">&lt;article id="demo_article"&gt;</p>
+                                <ul class="tasks_list replacing_list">
+                                    <p class="list_title">&lt;ul class="tasks_list"&gt;</p>
+                                    <li class="demo_list">&lt;li class="demo_list"&gt;Task no.1&lt;/li&gt;</li>
+                                    <li class="demo_list">&lt;li&gt;&lt;a href="#"&gt;<a href="#">Task
+                                            no.2</a>&lt;/a&gt;&lt;/li&gt;</a></li>
+                                    <li class="demo_list" id="this_one">&lt;li class="demo_list"&gt;Task no.3&lt;/li&gt;
+                                    </li>
+                                    <li class="demo_list">&lt;li class="demo_list"&gt;Task no.4&lt;/li&gt;</li>
+                                    <li class="demo_list" id="new-item">&lt;li class="demo_list" id="new_item"&gt;&lt;a
+                                        href="#"&gt;<a href="#">New task</a>&lt;/a&gt;&lt;/li&gt;</li>
+                                </ul>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Slide 10 -->
+        <section>
+            <div class="wrap">
+                <h2><strong>Removing DOM elements from JS</strong></h2><br>
+                <div class="grid vertical-align">
+                    <div class="column bg-white">
+                        <h4>How do we do it?</h4>
+                        <h5>Select the Element</h5>
+                        <code>
+                            const liElement = document.querySelectorAll('li');
+                        </code>
+                        <code>
+                            const ulElem = document.querySelector('ul');
+                        </code>
+                        <h5>Remove list item</h5>
+                        <code>
+                            liElement[5].remove();
+                        </code>
+                        <h5>Or remove element's child</h5>
+                        <code>
+                            ulElem.removeChild(liElement[5]);
+                        </code>
+                    </div>
+                    <div class="column">
+                        <article class="demo_article">
+                            <div class="article_content">
+                                <p class="list_title">&lt;article id="demo_article"&gt;</p>
+                                <ul class="tasks_list removing_list">
+                                    <p class="list_title">&lt;ul class="tasks_list"&gt;</p>
+                                    <li class="demo_list">&lt;li class="demo_list"&gt;Task no.1&lt;/li&gt;</li>
+                                    <li class="demo_list">&lt;li&gt;&lt;a href="#"&gt;<a href="#">Task
+                                            no.2</a>&lt;/a&gt;&lt;/li&gt;</a></li>
+                                    <li class="demo_list">&lt;li class="demo_list"&gt;Task no.3&lt;/li&gt;</li>
+                                    <li class="demo_list">&lt;li class="demo_list"&gt;Task no.4&lt;/li&gt;</li>
+                                    <li class="demo_list" id="item_remove">&lt;li class="demo_list"
+                                        id="new_item"&gt;&lt;a href="#"&gt;<a href="#">New task</a>&lt;/a&gt;&lt;/li&gt;
+                                    </li>
+                                </ul>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Slide 11 -->
+        <section>
+            <div class="wrap">
+                <h2><strong>Mouse Event listeners</strong></h2><br>
+                <div class="grid sm bg-white">
+                    <div class="column bg-gray">
+                        <p>click</p>
+                        <p>dblclick</p>
+                        <p>mousedown</p>
+                        <p>mouseenter</p>
+                        <p>mouseleave</p>
+                        <p>mousemove</p>
+                        <p>mouseout</p>
+                        <p>mouseover</p>
+                        <p>mouseup</p>
+                    </div>
+                    <div class="column">
+                        <p>The event occurs when the user clicks on an element</p>
+                        <p>The event occurs when the user double-clicks on an element</p>
+                        <p>The event occurs when the user presses a mouse button over an element</p>
+                        <p>The event occurs when the pointer is moved onto an element</p>
+                        <p>The event occurs when the pointer is moved out of an element</p>
+                        <p>The event occurs when the pointer is moving while it is over an element</p>
+                        <p>The event occurs when a user moves the mouse pointer out of an element, or out of one of its children</p>
+                        <p>	The event occurs when the pointer is moved onto an element, or onto one of its children</p>
+                        <p>The event occurs when a user releases a mouse button over an element</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Slide 12 -->
+        <section class="interactive_background">
+            <div class="wrap">
+                <h2><strong>Event properties</strong></h2><br>
+                <p class="text-intro">Event properties are attributes of a particular event. The values they contain are current for the moment at which the event was triggered.</p>
+                <div class="grid vertical-align">
+                    <div class="column bg-white">
+                        <h5>For instance</h5>
+                        <ul>
+                            <li>
+                                <h5>Select the DOM element</h5>
+                                <code>
+                                    const article = document.querySelector('article');
+                                </code>
+                            </li>
+                            <li>
+                                <h5>Add an Event listener</h5>
+                                <code>
+                                    article.addEventListener('mousemove', runEvent);
+                                </code>
+                            </li>
+                            <li>
+                                <h5>runEvent function</h5>
+                                <code>
+                                    function runEvent(e) {<br>
+                                        console.log(`EVENT TYPE: ${e.type}`);<br>
+                                        section.style.backgroundColor = `rgb(${e.offsetX}, ${e.offsetY}, 200)`;<br>
+                                    }
+                                </code>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <article class="demo_article interactive_article">
+                            <div class="article_content">
+                                <p class="list_title">&lt;article id="demo_article"&gt;</p>
+                                <ul class="tasks_list specific_select">
+                                    <p class="list_title">&lt;ul class="tasks_list"&gt;</p>
+                                    <li class="demo_list">&lt;li&gt;Task no.1&lt;/li&gt;</li>
+                                    <li class="demo_list">&lt;li&gt;Task no.2&lt;/li&gt;</li>
+                                    <li class="demo_list">&lt;li&gt;Task no.3&lt;/li&gt;</li>
+                                    <li class="demo_list">&lt;li&gt;Task no.4&lt;/li&gt;</li>
+                                </ul>
+                            </div>
+                        </article>
+                        <h5 class="interactive_text">Text content</h5>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Slide 13 -->
+        <section>
+            <div class="wrap">
+                <h2><strong>Event properties</strong></h2><br>
+                <p class="text-intro">Events that occur when the mouse interacts with the HTML document belongs to the MouseEvent Object.</p>
+                <div class="grid sm bg-white">
+                    <div class="column bg-gray">
+                        <p>altKey</p>
+                        <p>button</p>
+                        <p>buttons</p>
+                        <p>clientX</p>
+                        <p>clientY</p>
+                        <p>ctrlKey</p>
+                        <p>getModifierState()</p>
+                        <p>offsetX</p>
+                        <p>offsetY</p>
+                    </div>
+                    <div class="column">
+                        <p>Returns whether the "ALT" key was pressed when the mouse event was triggered</p>
+                        <p>Returns which mouse button was pressed when the mouse event was triggered</p>
+                        <p>Returns which mouse buttons were pressed when the mouse event was triggered</p>
+                        <p>Returns the horizontal coordinate of the mouse pointer, relative to the current window, when the mouse event was triggered</p>
+                        <p>Returns the vertical coordinate of the mouse pointer, relative to the current window, when the mouse event was triggered</p>
+                        <p>Returns whether the "CTRL" key was pressed when the mouse event was triggered</p>
+                        <p>Returns true if the specified key is activated</p>
+                        <p>Returns the horizontal coordinate of the mouse pointer relative to the position of the edge of the target element</p>
+                        <p>Returns the vertical coordinate of the mouse pointer relative to the position of the edge of the target element</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Slide 14 -->
+        <section>
+            <div class="wrap">
+                <h3 class="content-center">Good hacking!</h3>
+            </div>
+        </section>
+    </article>
+    <script src="js/webslides.js"></script>
+    <script>
+        window.ws = new WebSlides();
+    </script>
+    <script src="js/presentation.js"></script>
+</body>
+
+</html>
